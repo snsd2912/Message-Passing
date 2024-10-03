@@ -39,7 +39,7 @@ jobs:
       - name: Build and push Docker image for person 
         uses: docker/build-push-action@v5
         with:
-          context: /modules/person
+          context: ./modules/person
           file: ./modules/person/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-person:latest
@@ -48,7 +48,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./modules/frontend/
-          file: ./modules/frontend//Dockerfile
+          file: ./modules/frontend/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-frontend:latest
 
