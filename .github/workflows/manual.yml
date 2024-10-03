@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - feature/*
 
 jobs:
   build-and-push:
@@ -29,8 +30,8 @@ jobs:
       - name: Build and push Docker image for geoconnections 
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: ./modules/connection/Dockerfile  # Path to your Dockerfile
+          context: ./modules/connection
+          file: ./Dockerfile 
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-geoconnections:latest
       
@@ -38,31 +39,31 @@ jobs:
       - name: Build and push Docker image for person 
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: ./modules/person/Dockerfile  # Path to your Dockerfile
+          context: /modules/person
+          file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-person:latest
       
       - name: Build and push Docker image for frontend 
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: ./modules/frontend/Dockerfile  # Path to your Dockerfile
+          context: ./modules/frontend/
+          file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-frontend:latest
 
       - name: Build and push Docker image for location 
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: ./modules/location/Dockerfile  # Path to your Dockerfile
+          context: ./modules/location
+          file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-location:latest
 
       - name: Build and push Docker image for location-consumer 
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: ./modules/location-consumer/Dockerfile  # Path to your Dockerfile
+          context: ./modules/location-consumer
+          file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-location-consumer:latest
