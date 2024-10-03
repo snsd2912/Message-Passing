@@ -1,0 +1,74 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: location-consumer
+  name: location-consumer
+spec:
+  ports:
+  - name: "9092"
+    port: 9092
+    targetPort: 9092
+  selector:
+    service: location-consumer
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: location-consumer
+  name: location-consumer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: location-consumer
+  template:
+    metadata:
+      labels:
+        service: location-consumer
+    spec:
+      containers:
+      - image: wing0805/message-passing-location-consumer:latest
+        name: location-consumer-container
+        imagePullPolicy: Always
+        env:
+        - name: DB_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: location-consumer-env
+              key: DB_USERNAME
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-geoconnections-secret
+              key: DB_PASSWORD
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: location-consumer-env
+              key: DB_NAME
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: location-consumer-env
+              key: DB_HOST
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: location-consumer-env
+              key: DB_PORT
+        - name: KAFKA_SERVER
+          valueFrom:
+            configMapKeyRef:
+              name: location-consumer-env
+              key: KAFKA_SERVER
+        - name: TOPIC_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: location-consumer-env
+              key: TOPIC_NAME
+        - name: PYTHONUNBUFFERED
+          value: '0'
+      restartPolicy: Always
