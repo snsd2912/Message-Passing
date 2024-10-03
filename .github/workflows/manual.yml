@@ -31,7 +31,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./modules/connection
-          file: ./Dockerfile 
+          file: ./modules/connection/Dockerfile 
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-geoconnections:latest
       
@@ -40,7 +40,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: /modules/person
-          file: ./Dockerfile
+          file: ./modules/person/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-person:latest
       
@@ -48,7 +48,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./modules/frontend/
-          file: ./Dockerfile
+          file: ./modules/frontend//Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-frontend:latest
 
@@ -56,7 +56,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./modules/location
-          file: ./Dockerfile
+          file: ./modules/location/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-location:latest
 
@@ -64,6 +64,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./modules/location-consumer
-          file: ./Dockerfile
+          file: ./modules/location-consumer/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-location-consumer:latest
