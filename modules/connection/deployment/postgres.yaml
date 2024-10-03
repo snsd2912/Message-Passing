@@ -65,17 +65,17 @@ spec:
           - name: POSTGRES_USER
             valueFrom:
               configMapKeyRef:
-                name: person-env
+                name: geoconnections-env
                 key: DB_USERNAME
           - name: POSTGRES_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: person-secret
+                name: geoconnections-secret
                 key: DB_PASSWORD
           - name: POSTGRES_DB
             valueFrom:
               configMapKeyRef:
-                name: person-env
+                name: geoconnections-env
                 key: DB_NAME
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
