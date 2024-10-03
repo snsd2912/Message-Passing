@@ -26,31 +26,29 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # Build and push the Docker image
-      - name: Build and push Docker image for geoconnections 
-        uses: docker/build-push-action@v5
-        with:
-          context: ./modules/connection
-          file: ./modules/connection/Dockerfile 
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-geoconnections:latest
+      # - name: Build and push Docker image for geoconnections 
+      #   uses: docker/build-push-action@v5
+      #   with:
+      #     context: ./modules/connection
+      #     file: ./modules/connection/Dockerfile 
+      #     push: true
+      #     tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-geoconnections:latest
       
-      # Build and push the Docker image
-      - name: Build and push Docker image for person 
-        uses: docker/build-push-action@v5
-        with:
-          context: ./modules/person
-          file: ./modules/person/Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-person:latest
+      # - name: Build and push Docker image for person 
+      #   uses: docker/build-push-action@v5
+      #   with:
+      #     context: ./modules/person
+      #     file: ./modules/person/Dockerfile
+      #     push: true
+      #     tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-person:latest
       
-      - name: Build and push Docker image for frontend 
-        uses: docker/build-push-action@v5
-        with:
-          context: ./modules/frontend/
-          file: ./modules/frontend/Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-frontend:latest
+      # - name: Build and push Docker image for frontend 
+      #   uses: docker/build-push-action@v5
+      #   with:
+      #     context: ./modules/frontend/
+      #     file: ./modules/frontend/Dockerfile
+      #     push: true
+      #     tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-frontend:latest
 
       - name: Build and push Docker image for location 
         uses: docker/build-push-action@v5
