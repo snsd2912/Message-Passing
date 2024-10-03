@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+data:
+  DB_USERNAME: "ct_geoconnections"
+  DB_NAME: "geoconnections"
+  DB_HOST: "postgres-geoconnections"
+  DB_PORT: "5432"
+  PERSON_SERVICE_ENDPOINT: "http://udaconnect-person:5000/"
+metadata:
+  name: geoconnections-env

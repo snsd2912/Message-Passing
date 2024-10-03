@@ -1,46 +1,68 @@
-# Workflow to ensure whenever a Github PR is submitted, 
-# a JIRA ticket gets created automatically. 
-name: Manual Workflow
+name: Message Passing - Package with Docker
 
-# Controls when the action will run. 
 on:
-  # Triggers the workflow on pull request events but only for the master branch
-  pull_request_target:
-    types: [assigned, opened, reopened]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
-  test-transition-issue:
-    name: Convert Github Issue to Jira Issue
+  build-and-push:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Checkout
-      uses: actions/checkout@master
+      # Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Login
-      uses: atlassian/gajira-login@master
-      env:
-        JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
-        JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
-        JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
-        
-    - name: Create NEW JIRA ticket
-      id: create
-      uses: atlassian/gajira-create@master
-      with:
-        project: CONUPDATE
-        issuetype: Task
-        summary: |
-          Github PR - nd064	Cloud Native Architect Message Passing C2 | Repo: ${{ github.repository }}  | PR# ${{github.event.number}}
-        description: |
-           Repo link: https://github.com/${{ github.repository }}   
-           PR no. ${{ github.event.pull_request.number }} 
-           PR title: ${{ github.event.pull_request.title }}  
-           PR description: ${{ github.event.pull_request.description }}  
-           In addition, please resolve other issues, if any. 
-        fields: '{"components": [{"name":"nd064 - Cloud Native Architecture: Microservices at Scale"}], "customfield_16449":"https://classroom.udacity.com/nanodegrees/nd101/dashboard/overview", "customfield_16450":"Resolve the PR", "labels": ["github"], "priority":{"id": "4"}}'
+      # Set up Docker Buildx
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
 
-    - name: Log created issue
-      run: echo "Issue ${{ steps.create.outputs.issue }} was created"
+      # Log in to DockerHub
+      - name: Log in to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # Build and push the Docker image
+      - name: Build and push Docker image for geoconnections 
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./modules/connection/Dockerfile  # Path to your Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-geoconnections:latest
+      
+      # Build and push the Docker image
+      - name: Build and push Docker image for person 
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./modules/person/Dockerfile  # Path to your Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-person:latest
+      
+      - name: Build and push Docker image for frontend 
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./modules/frontend/Dockerfile  # Path to your Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-frontend:latest
+
+      - name: Build and push Docker image for location 
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./modules/location/Dockerfile  # Path to your Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-location:latest
+
+      - name: Build and push Docker image for location-consumer 
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./modules/location-consumer/Dockerfile  # Path to your Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-location-consumer:latest
