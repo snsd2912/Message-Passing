@@ -2,8 +2,8 @@ import time
 from concurrent import futures
 
 import grpc
-import locaton_pb2
-import locaton_pb2_grpc
+import location_pb2
+import location_pb2_grpc
 import os
 
 from kafka import KafkaProducer
