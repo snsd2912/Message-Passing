@@ -42,7 +42,7 @@ spec:
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: db-geoconnections-secret
+              name: location-consumer-secret
               key: DB_PASSWORD
         - name: DB_NAME
           valueFrom:
