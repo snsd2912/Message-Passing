@@ -50,7 +50,7 @@ jobs:
       #     push: true
       #     tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-frontend:latest
 
-      # - name: Build and push Docker image for location 
+      - name: Build and push Docker image for location 
         uses: docker/build-push-action@v5
         with:
           context: ./modules/location
