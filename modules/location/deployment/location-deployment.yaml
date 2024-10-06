@@ -31,7 +31,7 @@ spec:
         service: udaconnect-location
     spec:
       containers:
-      - image: wing0805/message-passing-location:latest
+      - image: wing0805/message-passing-location:1.0.0
         name: udaconnect-location
         imagePullPolicy: Always
         env:
