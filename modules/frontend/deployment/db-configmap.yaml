@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+data:
+  CONNECTION_API_BASE_URL: "http://udaconnect-geoconnections:30002"
+  PERSON_API_BASE_URL: "http://udaconnect-person:30001"
+metadata:
+  name: frontend-env
