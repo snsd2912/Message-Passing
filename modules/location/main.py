@@ -19,7 +19,7 @@ logging.info('Connecting to Kafka Server...')
 producer = KafkaProducer(bootstrap_servers=KAFKA_SERVER)
 logging.info('Connected to Kafka Server at: {KAFKA_SERVER}')
 
-class LocationServicer(locaton_pb2_grpc.LocationServiceServicer):
+class LocationServicer(location_pb2_grpc.LocationServiceServicer):
     def Create(self, request, context):
 
         request_value = {

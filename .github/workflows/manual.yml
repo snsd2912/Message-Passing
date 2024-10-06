@@ -56,7 +56,7 @@ jobs:
           context: ./modules/location
           file: ./modules/location/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-location:1.0.0
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-location:latest
 
       # - name: Build and push Docker image for location-consumer 
       #   uses: docker/build-push-action@v5
