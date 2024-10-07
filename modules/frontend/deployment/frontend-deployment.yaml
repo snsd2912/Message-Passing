@@ -42,7 +42,7 @@ spec:
               key: PERSON_API_BASE_URL
         - name: CONNECTION_API_BASE_URL
           valueFrom:
-            secretKeyRef:
+            configMapKeyRef:
               name: frontend-env
               key: CONNECTION_API_BASE_URL
         resources:
