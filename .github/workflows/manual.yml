@@ -42,13 +42,13 @@ jobs:
       #     push: true
       #     tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-person:latest
       
-      - name: Build and push Docker image for frontend 
-        uses: docker/build-push-action@v5
-        with:
-          context: ./modules/frontend/
-          file: ./modules/frontend/Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-frontend:latest
+      # - name: Build and push Docker image for frontend 
+      #   uses: docker/build-push-action@v5
+      #   with:
+      #     context: ./modules/frontend/
+      #     file: ./modules/frontend/Dockerfile
+      #     push: true
+      #     tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-frontend:latest
 
       # - name: Build and push Docker image for location 
       #   uses: docker/build-push-action@v5
