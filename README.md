@@ -14,7 +14,7 @@ Conferences and conventions are hotspots for making connections. Professionals i
 
 ### Architecture Decision
 
-[Architecture](./images/MessagePassing.drawio.png)
+![Architecture](./images/MessagePassing.drawio.png)
 
 - **Frontend** provides UI for user interaction.
 - **Person Service** is RESTFul API service which keep user information.
@@ -97,7 +97,7 @@ kubectl apply -f deployment/
 kubectl apply -f deployment/
 ```
 
-[location-consumer-log](./images/location-consumer-logs.PNG)
+![location-consumer-log](./images/location-consumer-logs.PNG)
 
 ### Frontend Service
 
@@ -106,13 +106,13 @@ kubectl apply -f deployment/
 kubectl apply -f deployment/
 ```
 
-[ui](./images/ui.png)
+![ui](./images/ui.png)
 
 ### Verifying it Works
 Once the project is up and running, you should be able to see 3 deployments and 3 services in Kubernetes:
 `kubectl get pods` and `kubectl get services` - should both return `udaconnect-app`, `udaconnect-api`, and `postgres`
 
-[k8s](./images/k8s-deployment.PNG)
+![k8s](./images/k8s-deployment.PNG)
 
 These pages should also load on your web browser:
 * `http://localhost:30000/` - Frontend ReactJS Application
