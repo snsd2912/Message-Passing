@@ -88,6 +88,8 @@ kubectl apply -f deployment/
 kubectl apply -f deployment/
 ```
 
+![location-request](./images/grpc_request.PNG)
+
 ### Location Consumer Service
 
 - This service needs to authenticate with Kafka to publish event. It requires `username` and `password`. Check `./modules/kafka/README.md` to get password of Kafka.
