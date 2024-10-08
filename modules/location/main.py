@@ -32,7 +32,7 @@ class LocationServicer(location_pb2_grpc.LocationServiceServicer):
     def Create(self, request, context):
 
         request_value = {
-            'userId': int(request.userId),
+            'person_id': int(request.person_id),
             'latitude': int(request.latitude),
             'longitude': int(request.longitude)
         }

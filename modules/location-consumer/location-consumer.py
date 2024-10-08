@@ -39,7 +39,7 @@ def consume_and_save():
             data = message.value.decode('utf-8')
             location = json.loads(data)
             person_id = int(location["person_id"])
-            longitude, latitude = int(location["longitude"]), int(location["latitude"])
+            longitude, latitude = int(location["latitude"]), int(location["longitude"])
 
             insert = "INSERT INTO location (person_id, coordinate) VALUES ({}, ST_Point({}, {}))".format(person_id, latitude, longitude)
 
