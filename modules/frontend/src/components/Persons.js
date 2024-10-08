@@ -4,7 +4,7 @@ import Connection from "./Connection";
 class Persons extends Component {
   constructor(props) {
     super(props);
-    const API_BASE_URL = process.env.PERSON_API_BASE_URL || 'http://localhost:30001';
+    const API_BASE_URL = process.env.PERSON_API_BASE_URL || "http://localhost:30001";
     this.endpoint_url = `${API_BASE_URL}/api/persons`;
     this.state = {
       persons: [],

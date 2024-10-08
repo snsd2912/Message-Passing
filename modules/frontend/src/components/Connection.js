@@ -20,7 +20,7 @@ class Connection extends Component {
 
   getConnections = (personId) => {
     if (personId) {
-      const API_BASE_URL = process.env.CONNECTION_API_BASE_URL || 'http://localhost:30002';
+      const API_BASE_URL = process.env.CONNECTION_API_BASE_URL || "http://localhost:30002";
       
       const endpoint = `${API_BASE_URL}/api/persons/${personId}/connection?start_date=2020-01-01&end_date=2020-12-30&distance=5`;
 
