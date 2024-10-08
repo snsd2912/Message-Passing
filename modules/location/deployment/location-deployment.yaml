@@ -45,6 +45,16 @@ spec:
             configMapKeyRef:
               name: location-env
               key: TOPIC_NAME
+        - name: USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: location-env
+              key: USERNAME
+        - name: PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: location-secret
+              key: PASSWORD
         - name: PYTHONUNBUFFERED
           value: '0'
       restartPolicy: Always

@@ -34,6 +34,17 @@ spec:
       - image: wing0805/message-passing-frontend:latest
         name: udaconnect-frontend
         imagePullPolicy: Always
+        env:
+        - name: PERSON_API_BASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: frontend-env
+              key: PERSON_API_BASE_URL
+        - name: CONNECTION_API_BASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: frontend-env
+              key: CONNECTION_API_BASE_URL
         resources:
           requests:
             memory: "128Mi"

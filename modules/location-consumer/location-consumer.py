@@ -12,9 +12,18 @@ DB_PASSWORD = os.environ["DB_PASSWORD"]
 DB_HOST = os.environ["DB_HOST"]
 DB_PORT = os.environ["DB_PORT"]
 DB_NAME = os.environ["DB_NAME"]
+USERNAME = os.environ["USERNAME"]
+PASSWORD = os.environ["PASSWORD"]
 
-
-consumer = KafkaConsumer(TOPIC_NAME, bootstrap_servers=[KAFKA_SERVER])
+print('Connecting to Kafka Server...')
+consumer = KafkaConsumer(
+    TOPIC_NAME, 
+    bootstrap_servers=[KAFKA_SERVER],
+    security_protocol='SASL_PLAINTEXT',    
+    sasl_mechanism='SCRAM-SHA-256',                
+    sasl_plain_username=USERNAME,
+    sasl_plain_password=PASSWORD 
+)
 print('Start listening topic: ' + TOPIC_NAME)
 
 def connect_db():
@@ -30,7 +39,7 @@ def consume_and_save():
             data = message.value.decode('utf-8')
             location = json.loads(data)
             person_id = int(location["person_id"])
-            longitude, latitude = int(location["longitude"]), int(location["latitude"])
+            longitude, latitude = int(location["latitude"]), int(location["longitude"])
 
             insert = "INSERT INTO location (person_id, coordinate) VALUES ({}, ST_Point({}, {}))".format(person_id, latitude, longitude)
 

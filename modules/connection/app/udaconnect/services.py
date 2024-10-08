@@ -9,6 +9,7 @@ from geoalchemy2.functions import ST_AsText, ST_Point
 from sqlalchemy.sql import text
 
 from app.config import PERSON_SERVICE_ENDPOINT
+import requests
 
 logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger("udaconnect-api")

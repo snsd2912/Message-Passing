@@ -25,44 +25,42 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # Build and push the Docker image
       - name: Build and push Docker image for geoconnections 
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: ./modules/connection/Dockerfile  # Path to your Dockerfile
+          context: ./modules/connection
+          file: ./modules/connection/Dockerfile 
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-geoconnections:latest
       
-      # Build and push the Docker image
       - name: Build and push Docker image for person 
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: ./modules/person/Dockerfile  # Path to your Dockerfile
+          context: ./modules/person
+          file: ./modules/person/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-person:latest
       
       - name: Build and push Docker image for frontend 
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: ./modules/frontend/Dockerfile  # Path to your Dockerfile
+          context: ./modules/frontend/
+          file: ./modules/frontend/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-frontend:latest
 
       - name: Build and push Docker image for location 
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: ./modules/location/Dockerfile  # Path to your Dockerfile
+          context: ./modules/location
+          file: ./modules/location/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-location:latest
 
       - name: Build and push Docker image for location-consumer 
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: ./modules/location-consumer/Dockerfile  # Path to your Dockerfile
+          context: ./modules/location-consumer
+          file: ./modules/location-consumer/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/message-passing-location-consumer:latest

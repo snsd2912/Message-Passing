@@ -2,8 +2,8 @@ syntax = "proto3";
 
 message LocationMessage {
   int32 person_id = 1;
-  string longitude = 2;
-  string latitude = 3;
+  int32 latitude = 2;
+  int32 longitude = 3;
 }
 
 service LocationService {
