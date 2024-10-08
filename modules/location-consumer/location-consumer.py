@@ -15,7 +15,7 @@ DB_NAME = os.environ["DB_NAME"]
 USERNAME = os.environ["USERNAME"]
 PASSWORD = os.environ["PASSWORD"]
 
-logging.info('Connecting to Kafka Server...')
+print('Connecting to Kafka Server...')
 consumer = KafkaConsumer(
     TOPIC_NAME, 
     bootstrap_servers=[KAFKA_SERVER],
