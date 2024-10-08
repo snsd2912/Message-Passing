@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 data:
-  KAFKA_SERVER: kafka-release-controller-0.kafka-release-controller-headless.default.svc.cluster.local:9092
+  KAFKA_SERVER: my-kafka-controller-0.my-kafka-controller-headless.default.svc.cluster.local:9092
   TOPIC_NAME: test
   USERNAME: user1
 metadata:
