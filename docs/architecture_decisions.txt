@@ -1,0 +1,6 @@
+- Frontend provides UI for user interaction.
+- Person Service is RESTFul API service which keep user information.
+- Connection Service is RESTful API service which manage connections via geolocation.
+- Location Service recieves user coordinates sent by mobiles devices. This communication is established using gRPC. It works as a producer which send data to Kafka broker for downstream processing.
+- Location Consumer Service consumes data from Kafka broker and then save data to database.
+- The deployment process uses Kubernetes resources (Deployment) which can scale to handle large volumes of location data being ingested.
