@@ -1,0 +1,91 @@
+openapi: 3.0.0
+info:
+  title: UdaConnect Connection API
+  version: 1.0.0
+  description: API for managing connections via geolocation.
+servers:
+  - url: http://localhost:30002
+paths:
+  /api/persons/{person_id}/connection:
+    get:
+      summary: Get connections for a person
+      description: Retrieve connections based on date range and proximity for a given person.
+      operationId: getConnectionsForPerson
+      parameters:
+        - name: person_id
+          in: path
+          required: true
+          description: The unique ID of the person to get connections for.
+          schema:
+            type: integer
+        - name: start_date
+          in: query
+          required: true
+          description: Lower bound of date range.
+          schema:
+            type: string
+            format: date
+            example: "2024-01-01"
+        - name: end_date
+          in: query
+          required: true
+          description: Upper bound of date range.
+          schema:
+            type: string
+            format: date
+            example: "2024-01-31"
+        - name: distance
+          in: query
+          required: false
+          description: Proximity to a given user in meters (defaults to 5 meters).
+          schema:
+            type: integer
+            example: 5
+      responses:
+        '200':
+          description: A list of connections for the given person.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    person:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 6
+                        first_name:
+                          type: string
+                          example: Frank
+                        last_name:
+                          type: string
+                          example: Shader
+                        company_name:
+                          type: string
+                          example: USDA
+                    location:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 68
+                        latitude:
+                          type: string
+                          example: "-122.290883"
+                        longitude:
+                          type: string
+                          example: "37.55363"
+                        person_id:
+                          type: integer
+                          example: 6
+                        creation_time:
+                          type: string
+                          format: date-time
+                          example: "2020-08-15T10:37:06"
+        '400':
+          description: Invalid request or missing parameters.
+        '404':
+          description: Person not found or no connections found within the given parameters.

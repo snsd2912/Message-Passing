@@ -1,13 +1,28 @@
-kubectl exec --stdin --tty [pod-name] -- /bin/sh
+## Installation
 
-kubectl exec --stdin --tty kafka-0 -- /bin/sh
+### Install helm chart
 
-kafka-topics --bootstrap-server kafka:29092 --topic [topic-name] --create --partitions [number] --replication-factor [number]
+If you haven't installed Helm yet, you can do so by following the official [Helm installation guide](https://helm.sh/docs/intro/install/).
 
-kafka-topics --bootstrap-server kafka:29092 --topic test --create --partitions 3 --replication-factor 3
+### Add the Bitnami Repository
 
-helm install my-kafka bitnami/kafka --set auth.enabled=false --set service.type=NodePort
+Bitnami provides a well-maintained Helm chart for Kafka. First, add the Bitnami repository:
+```
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo update
+```
 
+### Install Kafka
+
+You can install Kafka using the following command. This will install Kafka along with Zookeeper:
+
+```
+helm install my-kafka bitnami/kafka
+```
+
+Result you will get:
+
+```
 NAME: my-kafka
 LAST DEPLOYED: Tue Oct  8 08:23:26 2024
 NAMESPACE: default
@@ -64,3 +79,23 @@ To create a pod that you can use as a Kafka client run the following commands:
 WARNING: There are "resources" sections in the chart not set. Using "resourcesPreset" is not recommended for production. For production installations, please set the following values according to your workload needs:
   - controller.resources
 +info https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+```
+
+### Verify the Installation
+
+You can check the status of your Kafka installation by running:
+
+```
+kubectl get pods
+```
+
+[kafka](../../images/kafka.PNG)
+
+### Uninstalling Kafka
+If you ever need to uninstall Kafka, you can do so with the following command:
+
+```
+helm uninstall my-kafka
+```
+
+
