@@ -7,5 +7,6 @@ data:
   DB_PORT: "5432"
   KAFKA_SERVER: kafka-release-controller-0.kafka-release-controller-headless.default.svc.cluster.local:9092
   TOPIC_NAME: test
+  USERNAME: user1
 metadata:
   name: location-consumer-env

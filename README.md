@@ -153,4 +153,6 @@ Your architecture diagram should focus on the services and how they talk to one 
 
 grpcurl -plaintext -d '{"person_id": 10, "longitude": 45, "latitude": 90}' localhost:30003 location_pb2.LocationService/Create
 
-grpcurl -plaintext -proto location.proto -d '{"person_id": 10, "longitude": "45", "latitude": "90"}' localhost:30003 LocationService/Create
+grpcurl -plaintext -proto location.proto -d '{"person_id": 10, "longitude": "-122.290883", "latitude": "37.55363"}' localhost:30003 LocationService/Create
+
+curl -X POST http://localhost:30001/api/persons -H "Content-Type: application/json" -d '{"first_name": "John", "last_name": "Doe", "company_name": "Example Corp"}'

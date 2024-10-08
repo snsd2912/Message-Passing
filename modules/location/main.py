@@ -32,14 +32,14 @@ class LocationServicer(location_pb2_grpc.LocationServiceServicer):
     def Create(self, request, context):
 
         request_value = {
-            'person_id': int(request.person_id),
-            'longitude': int(request.longitude),
-            'latitude': int(request.latitude)
+            'userId': int(request.userId),
+            'latitude': int(request.latitude),
+            'longitude': int(request.longitude)
         }
 
         logging.info('Processing: {request_value}')
 
-        send_data = json.dumps(request_value).encode('utf-8')
+        send_data = json.dumps(request_value, indent=2).encode('utf-8')
 
         producer.send(TOPIC_NAME, send_data)
         producer.flush()

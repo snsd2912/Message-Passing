@@ -12,9 +12,18 @@ DB_PASSWORD = os.environ["DB_PASSWORD"]
 DB_HOST = os.environ["DB_HOST"]
 DB_PORT = os.environ["DB_PORT"]
 DB_NAME = os.environ["DB_NAME"]
+USERNAME = os.environ["USERNAME"]
+PASSWORD = os.environ["PASSWORD"]
 
-
-consumer = KafkaConsumer(TOPIC_NAME, bootstrap_servers=[KAFKA_SERVER])
+logging.info('Connecting to Kafka Server...')
+consumer = KafkaConsumer(
+    TOPIC_NAME, 
+    bootstrap_servers=[KAFKA_SERVER],
+    security_protocol='SASL_PLAINTEXT',    
+    sasl_mechanism='SCRAM-SHA-256',                
+    sasl_plain_username=USERNAME,
+    sasl_plain_password=PASSWORD 
+)
 print('Start listening topic: ' + TOPIC_NAME)
 
 def connect_db():
