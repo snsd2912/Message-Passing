@@ -22,7 +22,7 @@ class Connection extends Component {
     if (personId) {
       const API_BASE_URL = process.env.CONNECTION_API_BASE_URL || "http://localhost:30002";
       
-      const endpoint = `${API_BASE_URL}/api/persons/${personId}/connection?start_date=2020-01-01&end_date=2024-12-30&distance=5`;
+      const endpoint = `${API_BASE_URL}/api/persons/${personId}/connection?start_date=2020-01-01&end_date=2024-12-30&distance=10`;
 
       fetch(
         endpoint
