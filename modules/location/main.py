@@ -14,9 +14,18 @@ import json
 
 KAFKA_SERVER = os.environ["KAFKA_SERVER"]
 TOPIC_NAME = os.environ["TOPIC_NAME"]
+USERNAME = os.environ["USERNAME"]
+PASSWORD = os.environ["PASSWORD"]
 
 logging.info('Connecting to Kafka Server...')
-producer = KafkaProducer(bootstrap_servers=KAFKA_SERVER)
+# producer = KafkaProducer(bootstrap_servers=KAFKA_SERVER)
+producer = KafkaProducer(
+    bootstrap_servers=KAFKA_SERVER,  
+    security_protocol='SASL_PLAINTEXT',    
+    sasl_mechanism='SCRAM-SHA-256',                
+    sasl_plain_username=USERNAME,
+    sasl_plain_password=PASSWORD 
+)
 logging.info('Connected to Kafka Server at: {KAFKA_SERVER}')
 
 class LocationServicer(location_pb2_grpc.LocationServiceServicer):
